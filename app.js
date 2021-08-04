@@ -1,70 +1,162 @@
-// This is an ARRAY of OBJECTS
-// Remember that an object is just a data structure with KEY:VALUE pairs
-// This allows us to combine multiple types of data into a single variable
+"use strict"
 
-let students = [
-  {
-    firstName: "B'Elanna",
-    lastName: "Torres",
-    gpa: 3.7,
-  },
-  {
-    firstName: "Chancellor",
-    lastName: "Gorkon",
-    gpa: 4.0,
-  },
-  {
-    firstName: "Alexander",
-    lastName: "Rozhenko",
-    gpa: 3.2,
-  },
-];
 
-console.log(students); // ALL the student objects in the array
-console.log(students[0]); // Only a SINGLE student object in the array
+//Menu functions.
+//Used for the overall flow of the application.
+/////////////////////////////////////////////////////////////////
+//#region 
 
-// Because this is an ARRAY, we can use higher order array methods on it
-// Remember that these methods utilize callback functions as arguments!
+// app is the function called to start the entire application
+function app(people){
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  let searchResults;
+  switch(searchType){
+    case 'yes':
+      searchResults = searchByName(people);
+      break;
+    case 'no':
+      // TODO: search by traits
+      break;
+      default:
+    app(people); // restart app
+      break;
+  }
+  
+  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+  mainMenu(searchResults, people);
+}
 
-// MAP
-// this is used to take an array and create a new array from it
-// with elements of that array that have been changed or modified in some way
+// Menu function to call once you find who you are looking for
+function mainMenu(person, people){
 
-let fullNames = students.map(function (student) {
-  //console.log(student); // when learning these methods, it is helpful to use console logs
-  // to explore each element of an array as the method iterates through it
-  return student.firstName + " " + student.lastName;
-});
+  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-console.log(fullNames);
+  if(!person){
+    alert("Could not find that individual.");
+    return app(people); // restart
+  }
 
-// FILTER
-// this is used to take an array and create a new array from it
-// it only returns certain elements based on conditions defined in the callback
+  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
-// this filter should remove Alexander Rozhenko since his GPA is less than 3.5
-let gpasGreaterThan3Point5 = students.filter(function (student) {
-  if (student.gpa > 3.5) {
+  switch(displayOption){
+    case "info":
+    // TODO: get person's info
+    break;
+    case "family":
+    // TODO: get person's family
+    break;
+    case "descendants":
+    // TODO: get person's descendants
+    break;
+    case "restart":
+    app(people); // restart
+    break;
+    case "quit":
+    return; // stop execution
+    default:
+    return mainMenu(person, people); // ask again
+  }
+}
+
+//#endregion
+
+//Filter functions.
+//Ideally you will have a function for each trait.
+/////////////////////////////////////////////////////////////////
+//#region 
+
+//nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
+function searchByName(people){
+  let firstName = promptFor("What is the person's first name?", autoValid);
+  let lastName = promptFor("What is the person's last name?", autoValid);
+
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person single person object using the name they entered.
+  return foundPerson;
+}
+
+//unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
+function searchByEyeColor(people){
+
+}
+
+//TODO: add other trait filter functions here.
+
+
+
+//#endregion
+
+//Display functions.
+//Functions for user interface.
+/////////////////////////////////////////////////////////////////
+//#region 
+
+// alerts a list of people
+function displayPeople(people){
+  alert(people.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n"));
+}
+
+function displayPerson(person){
+  // print all of the information about a person:
+  // height, weight, age, name, occupation, eye color.
+  let personInfo = "First Name: " + person.firstName + "\n";
+  personInfo += "Last Name: " + person.lastName + "\n";
+  // TODO: finish getting the rest of the information to display.
+  alert(personInfo);
+}
+
+//#endregion
+
+
+
+//Validation functions.
+//Functions to validate user input.
+/////////////////////////////////////////////////////////////////
+//#region 
+
+//a function that takes in a question to prompt, and a callback function to validate the user input.
+//response: Will capture the user input.
+//isValid: Will capture the return of the validation function callback. true(the user input is valid)/false(the user input was not valid).
+//this function will continue to loop until the user enters something that is not an empty string("") or is considered valid based off the callback function(valid).
+function promptFor(question, valid){
+  let response;
+  let isValid;
+  do{
+    response = prompt(question).trim();
+    isValid = valid(response);
+  } while(response !== ""  ||  isValid === false)
+  return response
+}
+
+// helper function/callback to pass into promptFor to validate yes/no answers.
+function yesNo(input){
+  if(input.toLowerCase() == "yes" || input.toLowerCase() == "no"){
     return true;
-  } else {
+  }
+  else{
     return false;
   }
-});
+}
 
-console.log(gpasGreaterThan3Point5);
+// helper function to pass in as default promptFor validation.
+//this will always return true for all inputs.
+function autoValid(input){
+  return true; // default validation only
+}
 
-// REDUCE
-// this is used to take an array and return a SINGLE VALUE
-// we can use this to simplify mathematical operations on sets of data with numbers
+//Unfinished validation function you can use for any of your custom validation callbacks.
+//can be used for things like eye color validation for example.
+function customValidation(input){
+  
+}
 
-// In this example, we can find the average GPA of our students
-// by dividing the RESULT of a reduce operation by the number of students in the array
-let averageGPA =
-  students.reduce(function (total, student) {
-    console.log(total);
-    return total + student.gpa;
-  }, 0) / students.length;
-
-//! NOTE: The second argument of the reduce method is an OPTIONAL initial value of the accumulator
-//! If this is not set, the initial value of the accumulator is the first element of the array
-console.log(averageGPA);
+//#endregion
