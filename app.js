@@ -60,6 +60,8 @@ function mainMenu(person, people){
 }
 
 //#endregion
+//"eyecolor, height"
+//["eyecolor", "height"]
 
 //Filter functions.
 //Ideally you will have a function for each trait.
@@ -80,7 +82,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  return foundPerson[0];
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -96,10 +98,24 @@ function searchByEyeColor(people){
     }
 
   })
-  return foundEyeColor;
+  return foundEyeColor[0];
 }
 
 //TODO: add other trait filter functions here.
+function searchByGender(people){
+  let gender = promptFor("What is the gender of the person you're looking for?", autoValid);
+  
+  let foundGender = people.filter(function(potentialMatch) {
+    if(potentialMatch.gender === gender){
+      return true;
+    }
+    else{
+      return false;
+    }
+
+  })
+  return foundGender[0];
+}
 
 
 
