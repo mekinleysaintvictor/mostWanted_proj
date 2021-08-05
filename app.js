@@ -12,7 +12,7 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-      searchResults = searchByName(people);
+      searchResults = searchByDOB(people); //searchByName
       break;
     case 'no':
       // TODO: search by traits
@@ -99,6 +99,19 @@ function searchByEyeColor(people){
   return foundEyeColor;
 }
 
+function searchByDOB(people){
+  let dOB = promptFor("What is the person's birthday?", autoValid);
+
+  let foundDOB = people.filter(function(potentialMatch){
+    if(potentialMatch.dOB === dOB){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return foundDOB[0];
+}
 //TODO: add other trait filter functions here.
 
 
