@@ -8,11 +8,11 @@
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
   let searchResults;
   switch(searchType){
     case 'yes':
-      searchResults = searchByName(people);
+      searchResults = searchByDOB(people); //searchByName
       break;
     case 'no':
       // TODO: search by traits
@@ -101,6 +101,19 @@ function searchByEyeColor(people){
   return foundEyeColor[0];
 }
 
+function searchByDOB(people){
+  let dOB = promptFor("What is the person's birthday?", autoValid);
+
+  let foundDOB = people.filter(function(potentialMatch){
+    if(potentialMatch.dOB === dOB){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return foundDOB[0];
+}
 //TODO: add other trait filter functions here.
 function searchByGender(people){
   let gender = promptFor("What is the gender of the person you're looking for?", autoValid);
