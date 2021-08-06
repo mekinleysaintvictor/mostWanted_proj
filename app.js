@@ -12,11 +12,11 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-      searchResults = searchByDOB(people); //searchByName
+      searchResults = searchByName(people); //searchByName
       break;
     case 'no':
       // TODO: search by traits
-      searchResults = searchByEyeColor(people);
+      searchResults = searchByTraits(people);
       break;
       default:
     app(people); // restart app
@@ -42,12 +42,15 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    displayPerson(person, people);
     break;
     case "family":
     // TODO: get person's family
+    displayFamily(person, people);
     break;
     case "descendants":
     // TODO: get person's descendants
+    displayDescendants(person,people);
     break;
     case "restart":
     app(people); // restart
@@ -86,7 +89,7 @@ function searchByName(people){
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people){
+function searchByTraits(people){
   let eyeColor = promptFor("What is the person's eye color?", autoValid);
   
   let foundEyeColor = people.filter(function(potentialMatch) {
@@ -102,10 +105,10 @@ function searchByEyeColor(people){
 }
 
 function searchByDOB(people){
-  let dOB = promptFor("What is the person's birthday?", autoValid);
+  let dob = promptFor("What is the person's birthday?", autoValid);
 
   let foundDOB = people.filter(function(potentialMatch){
-    if(potentialMatch.dOB === dOB){
+    if(potentialMatch.dob === dob){
       return true;
     }
     else{
@@ -130,8 +133,35 @@ function searchByGender(people){
   return foundGender[0];
 }
 
+function searchByHeight(people){
+  let height = promptFor("What is the height of the person you're looking for?", autoValid);
+  
+  let foundHeight = people.filter(function(potentialMatch) {
+    if(potentialMatch.height === height){
+      return true;
+    }
+    else{
+      return false;
+    }
 
+  })
+  return foundHeight[0];
+}
 
+function searchByOccupation(people){
+  let occupation = promptFor("What is the person's occupation?", autoValid);
+  
+  let foundOccupation = people.filter(function(potentialMatch) {
+    if(potentialMatch.occupation === occupation){
+      return true;
+    }
+    else{
+      return false;
+    }
+
+  })
+  return foundOccupation[0];
+}
 //#endregion
 
 //Display functions.
@@ -146,13 +176,31 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
+function displayPerson(person, people){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   // TODO: finish getting the rest of the information to display.
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+
   alert(personInfo);
+  app(people);
+}
+
+//Display Family
+function displayFamily(person, people){
+ 
+  let parent = "parent1" + "\n";
+  
+
+  alert(personInfo);
+  app(people);
 }
 
 //#endregion
