@@ -12,7 +12,7 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-      searchResults = searchByDOB(people); //searchByName
+      searchResults = searchByName(people);
       break;
     case 'no':
       // TODO: search by traits
@@ -48,7 +48,7 @@ function mainMenu(person, people){
     break;
     case "descendants":
     // TODO: get person's descendants
-    break;
+    break; 
     case "restart":
     app(people); // restart
     break;
@@ -130,6 +130,33 @@ function searchByGender(people){
   return foundGender[0];
 }
 
+function searchByWeight(people){
+  let weight = promptFor("What is the weight of the person you're looking for?", autoValid);
+
+  let foundWeight = people.filter(function(potentialMatch){
+    if(potentialMatch.weight === weight){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return foundWeight[0];
+}
+
+function searchByHeight(people){
+  let height = promptFor("What is the height of the person you're looking for?", autoValid);
+
+  let foundHeight = people.filter(function(potentialMatch){
+    if(potentialMatch.height == weight){
+        return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return foundHeight[0];
+}
 
 
 //#endregion
