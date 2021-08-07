@@ -93,20 +93,23 @@ function searchByName(people){
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
   let eyeColor = promptFor("What is the person's eye color?", autoValid);
+  let foundPerson;
 
   let foundEyeColor = people.filter(function(potentialMatch) {
     if(potentialMatch.eyeColor === eyeColor){
-      foundPerson = prompt("We found " + potentialMatch.firstName + " " + potentialMatch.lastName + ". Is this the person you're looking for?");
+      return true;
     }
     else{
       return false;
     }
   })
-  return foundEyeColor;
+  foundPerson = customValidation(foundEyeColor);
+  return foundPerson;
 }
 
 function searchByDOB(people){
   let dob = promptFor("If you know the person's DOB, enter it below.", autoValid);
+  let foundPerson;
 
   let foundDOB = people.filter(function(potentialMatch){
     if(potentialMatch.dob === dob){
@@ -116,12 +119,14 @@ function searchByDOB(people){
       return false;
     }
   })
-  return foundDOB;
+  foundPerson = customValidation(foundDOB);
+  return foundPerson;
 }
 //TODO: add other trait filter functions here.
 function searchByGender(people){
   let gender = promptFor("If you know the person's gender, enter it below.", autoValid);
-  
+  let foundPerson;
+
   let foundGender = people.filter(function(potentialMatch) {
     if(potentialMatch.gender === male){
       return true;
@@ -129,14 +134,13 @@ function searchByGender(people){
     else{
       return false;
     }
-
   })
-  return foundGender[0];
+  foundPerson = customValidation(foundGender);
+  return foundPerson;
 }
 
 function searchByWeight(people){
   let weight = promptFor("If you know the person's weight, enter it below.", autoValid);
-  let foundPerson;
 
   let foundWeight = people.filter(function(potentialMatch){
     if(potentialMatch.weight === weight){
@@ -146,13 +150,11 @@ function searchByWeight(people){
       return false;
     }
   })
-  foundPerson = customValidation(foundWeight);
-  return foundPerson;
+  return foundWeight[0];
 }
 
 function searchByHeight(people){
   let height = promptFor("If you know the person's height, enter it below.", autoValid);
-  let foundPerson;
 
   let foundHeight = people.filter(function(potentialMatch){
     if(potentialMatch.height == weight){
@@ -162,30 +164,28 @@ function searchByHeight(people){
       return false;
     }
   })
-  foundPerson = customValidation(foundHeight);
-  return foundPerson;
+  return foundHeight[0];
 }
 
-function searchByEyeColorTest(people){
-  let eyeColor = promptFor("What is the eye color of the person you are looking for?", autoValid);
-  let foundEyeColor = new Array();
-  for(let i = 0; i < people.length; i++){
-    if(people[i.eyeColor] == eyeColor){
-      foundEyeColor.push(i);
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
-  return foundEyeColor;
-}
+// function searchByEyeColorTest(people){
+//   let eyeColor = promptFor("What is the eye color of the person you are looking for?", autoValid);
+//   let foundEyeColor = new Array();
+//   for(let i = 0; i < people.length; i++){
+//     if(people[i.eyeColor] == eyeColor){
+//       foundEyeColor.push(i);
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   }
+//   return foundEyeColor;
+// }
 
 
 function searchByOccupation(people){
   let occupation = promptFor("If you know the person's occupation, enter it below.", autoValid);
-  let foundPerson;
-
+  
   let foundOccupation = people.filter(function(potentialMatch) {
     if(potentialMatch.occupation === occupation){
       return true;
@@ -195,14 +195,12 @@ function searchByOccupation(people){
     }
 
   })
-  foundPerson = customValidation(foundOccupation);
-  return foundPerson;
+  return foundOccupation[0];
 }
 
 function searchByID(people){
   let id = promptFor("If you know the person's ID, enter it below.", autoValid);
-  let foundPerson;
-
+  
   let foundID = people.filter(function(potentialMatch) {
     if(potentialMatch.id === id){
       return true;
@@ -210,9 +208,9 @@ function searchByID(people){
     else{
       return false;
     }
+
   })
-  foundPerson = customValidation(foundID);
-  return foundPerson;
+  return foundID[0];
 }
 
 //#endregion
@@ -252,10 +250,10 @@ function displayPerson(person, people){
 
 //Display Family
 function displayFamily(person, people) {
-let familyInfo = "Parent(s): " + person.parents + "\n";
-familyInfo += "Sibling(s): " + person.siblings + "\n";
-familyInfo += "Current Spouse: " + person.currentSpouse + "\n";
+let familyInfo = "Parent(s): " + person.parent + "\n";
 familyInfo += "Children: " + person.child + "\n";
+familyInfo += "Spouse: " + person.spouse + "\n";
+familyInfo += "Sibling(s) " + person.siblings + "\n";
 
 alert(familyInfo);
 app(people);
@@ -314,7 +312,18 @@ function autoValid(input){
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
-  
+  let foundPerson;
+  let answer;
+  for(let i = 0; i < input.length; i++){
+    answer = promptFor("Is " + input[i].firstName + " " + input[i].lastName + " the person you are looking for?", yesNo);
+    if(answer == "yes"){
+      foundPerson = input[i];
+      break;
+    }else{
+      foundPerson;
+    }
+  }
+  return foundPerson;
 }
 
 //#endregion
