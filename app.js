@@ -109,6 +109,7 @@ function searchByEyeColor(people){
 
 function searchByDOB(people){
   let dob = promptFor("If you know the person's DOB, enter it below.", autoValid);
+  let foundPerson;
 
   let foundDOB = people.filter(function(potentialMatch){
     if(potentialMatch.dob === dob){
@@ -118,12 +119,14 @@ function searchByDOB(people){
       return false;
     }
   })
-  return foundDOB;
+  foundPerson = customValidation(foundDOB);
+  return foundPerson;
 }
 //TODO: add other trait filter functions here.
 function searchByGender(people){
   let gender = promptFor("If you know the person's gender, enter it below.", autoValid);
-  
+  let foundPerson;
+
   let foundGender = people.filter(function(potentialMatch) {
     if(potentialMatch.gender === male){
       return true;
@@ -131,9 +134,9 @@ function searchByGender(people){
     else{
       return false;
     }
-
   })
-  return foundGender[0];
+  foundPerson = customValidation(foundGender);
+  return foundPerson;
 }
 
 function searchByWeight(people){
@@ -312,7 +315,7 @@ function customValidation(input){
   let foundPerson;
   let answer;
   for(let i = 0; i < input.length; i++){
-    answer = prompt("Is " + input[i].firstName + " " + input[i].lastName + " the personyou are looking for?");
+    answer = promptFor("Is " + input[i].firstName + " " + input[i].lastName + " the person you are looking for?", yesNo);
     if(answer == "yes"){
       foundPerson = input[i];
       break;
