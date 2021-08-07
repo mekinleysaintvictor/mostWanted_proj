@@ -87,9 +87,24 @@ function searchByName(people){
   return foundPerson[0];
 }
 
+//Search by traits
+// function searchByTraits(people) {
+//   let getTraitsList = "";
+//   let getFilteredTraits;
+// getFilteredTraits = searchByEyeColor(people);
+// getFilteredTraits = searchByDOB(people);
+// getFilteredTraits = searchByGender(people);
+// getFilteredTraits = searchByHeight(people);
+// getFilteredTraits = searchByWeight(people);
+// getFilteredTraits = searchByOccupation(people);
+
+// if(getFilteredTraits.length === 22) {
+//   console.log("Would you like to search again?");
+// }
+// }
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByTraits(people){
-  let eyeColor = promptFor("What is the person's eye color?", autoValid);
+function searchByEyeColor(people){
+  let eyeColor = promptFor("If you know the person's eye color, enter it below?", autoValid);
   
   let foundEyeColor = people.filter(function(potentialMatch) {
     if(potentialMatch.eyeColor === eyeColor){
@@ -176,6 +191,22 @@ function searchByOccupation(people){
   })
   return foundOccupation[0];
 }
+
+function searchByID(people){
+  let id = promptFor("If you know the person's ID, enter it below.", autoValid);
+  
+  let foundID = people.filter(function(potentialMatch) {
+    if(potentialMatch.id === id){
+      return true;
+    }
+    else{
+      return false;
+    }
+
+  })
+  return foundID[0];
+}
+
 //#endregion
 
 //Display functions.
@@ -202,20 +233,43 @@ function displayPerson(person, people){
   personInfo += "DOB: " + person.dob + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "ID: " + person.id + "\n";
+
 
   alert(personInfo);
+  alert("Is this who you are looking for?")
+  
   app(people);
 }
-
+console.log("Is this who you are looking for?")
 //Display Family
-function displayFamily(person, people){
+function searchByParents(people) {
+  let parents = ("");
+  let foundParents = people.filter(function(potentialMatch) {
+    if(potentialMatch.parents === parents) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return foundParents[0];
+}
+
+
+// function displayFamily(person, people){
  
-  let parent = "parent1" + "\n";
+//   let parents = "parent1" + "\n";
+//   let grandparent = "grandparent1" + "\n";
+//   let siblings = "siblings1" + "\n";
+
+//   //Display Descendants
+//   let children = "children1" + "\n";
   
 
-  alert(personInfo);
-  app(people);
-}
+//   alert(personInfo);
+//   app(people);
+// }
 
 //#endregion
 
