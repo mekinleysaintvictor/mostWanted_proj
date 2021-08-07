@@ -12,7 +12,7 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-      searchResults = searchByName(people); //searchByName
+      searchResults = searchByName(people);
       break;
     case 'no':
       // TODO: search by traits
@@ -30,7 +30,7 @@ function app(people){
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
+  //original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
   if(!person){
     alert("Could not find that individual.");
@@ -50,8 +50,7 @@ function mainMenu(person, people){
     break;
     case "descendants":
     // TODO: get person's descendants
-    displayDescendants(person,people);
-    break;
+    break; 
     case "restart":
     app(people); // restart
     break;
@@ -122,7 +121,7 @@ function searchByGender(people){
   let gender = promptFor("What is the gender of the person you're looking for?", autoValid);
   
   let foundGender = people.filter(function(potentialMatch) {
-    if(potentialMatch.gender === gender){
+    if(potentialMatch.gender === male){
       return true;
     }
     else{
@@ -133,20 +132,35 @@ function searchByGender(people){
   return foundGender[0];
 }
 
-function searchByHeight(people){
-  let height = promptFor("What is the height of the person you're looking for?", autoValid);
-  
-  let foundHeight = people.filter(function(potentialMatch) {
-    if(potentialMatch.height === height){
+
+function searchByWeight(people){
+  let weight = promptFor("What is the weight of the person you're looking for?", autoValid);
+
+  let foundWeight = people.filter(function(potentialMatch){
+    if(potentialMatch.weight === weight){
       return true;
     }
     else{
       return false;
     }
+  })
+  return foundWeight[0];
+}
 
+function searchByHeight(people){
+  let height = promptFor("What is the height of the person you're looking for?", autoValid);
+
+  let foundHeight = people.filter(function(potentialMatch){
+    if(potentialMatch.height == weight){
+        return true;
+    }
+    else{
+      return false;
+    }
   })
   return foundHeight[0];
 }
+
 
 function searchByOccupation(people){
   let occupation = promptFor("What is the person's occupation?", autoValid);
