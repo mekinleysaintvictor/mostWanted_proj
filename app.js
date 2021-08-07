@@ -12,11 +12,11 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-      searchResults = searchByEyeColor(people); //search by name
+      searchResults = searchByGender(people); //search by name
       break;
     case 'no':
       // TODO: search by traits
-      searchResults = searchByTraits(people);
+      searchResults = searchByName(people);
       break;
       default:
     app(people); // restart app
@@ -128,7 +128,7 @@ function searchByGender(people){
   let foundPerson;
 
   let foundGender = people.filter(function(potentialMatch) {
-    if(potentialMatch.gender === male){
+    if(potentialMatch.gender === gender){
       return true;
     }
     else{
@@ -315,7 +315,7 @@ function customValidation(input){
   let foundPerson;
   let answer;
   for(let i = 0; i < input.length; i++){
-    answer = promptFor("Is " + input[i].firstName + " " + input[i].lastName + " the person you are looking for?", yesNo);
+    answer = promptFor("Is " + input[i].firstName + " " + input[i].lastName + " the person you are looking for? Type 'yes' or 'no' below.", yesNo);
     if(answer == "yes"){
       foundPerson = input[i];
       break;
