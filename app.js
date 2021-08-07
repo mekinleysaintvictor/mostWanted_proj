@@ -12,7 +12,7 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-      searchResults = searchByName(people);
+      searchResults = searchByEyeColor(people); //search by name
       break;
     case 'no':
       // TODO: search by traits
@@ -88,17 +88,17 @@ function searchByName(people){
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
   let eyeColor = promptFor("What is the person's eye color?", autoValid);
-  
+  let foundPerson;
+
   let foundEyeColor = people.filter(function(potentialMatch) {
     if(potentialMatch.eyeColor === eyeColor){
-      return true;
+      foundPerson = prompt("We found " + potentialMatch.firstName + " " + potentialMatch.lastName + ". Is this the person you're looking for?");
     }
     else{
       return false;
     }
-
   })
-  return foundEyeColor[0];
+  return foundEyeColor;
 }
 
 function searchByDOB(people){
@@ -112,7 +112,7 @@ function searchByDOB(people){
       return false;
     }
   })
-  return foundDOB[0];
+  return foundDOB;
 }
 //TODO: add other trait filter functions here.
 function searchByGender(people){
@@ -156,6 +156,21 @@ function searchByHeight(people){
     }
   })
   return foundHeight[0];
+}
+
+function searchByEyeColorTest(people){
+  let eyeColor = promptFor("What is the eye color of the person you are looking for?", autoValid);
+  let foundEyeColor = new Array();
+  for(let i = 0; i < people.length; i++){
+    if(people[i.eyeColor] == eyeColor){
+      foundEyeColor.push(i);
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  return foundEyeColor;
 }
 
 
