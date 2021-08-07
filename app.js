@@ -93,7 +93,6 @@ function searchByName(people){
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
   let eyeColor = promptFor("What is the person's eye color?", autoValid);
-  let foundPerson;
 
   let foundEyeColor = people.filter(function(potentialMatch) {
     if(potentialMatch.eyeColor === eyeColor){
@@ -246,10 +245,10 @@ function displayPerson(person, people){
 
 //Display Family
 function displayFamily(person, people) {
-let familyInfo = "Parent(s): " + person.parent + "\n";
-familyInfo += "Children: " + person.child + "\n";
-familyInfo += "Spouse: " + person.spouse + "\n";
+let familyInfo = "Parent(s): " + person.parents + "\n";
 familyInfo += "Sibling(s) " + person.siblings + "\n";
+familyInfo += "Current Spouse: " + person.currentSpouse + "\n";
+familyInfo += "Children: " + person.child + "\n";
 
 alert(familyInfo);
 app(people);
