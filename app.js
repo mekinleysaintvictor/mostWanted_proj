@@ -140,6 +140,7 @@ function searchByGender(people){
 
 function searchByWeight(people){
   let weight = promptFor("If you know the person's weight, enter it below.", autoValid);
+  let foundPerson;
 
   let foundWeight = people.filter(function(potentialMatch){
     if(potentialMatch.weight === weight){
@@ -149,11 +150,13 @@ function searchByWeight(people){
       return false;
     }
   })
-  return foundWeight[0];
+  foundPerson = customValidation(foundWeight);
+  return foundPerson;
 }
 
 function searchByHeight(people){
   let height = promptFor("If you know the person's height, enter it below.", autoValid);
+  let foundPerson;
 
   let foundHeight = people.filter(function(potentialMatch){
     if(potentialMatch.height == weight){
@@ -163,28 +166,14 @@ function searchByHeight(people){
       return false;
     }
   })
-  return foundHeight[0];
+  foundPerson = customValidation(foundHeight);
+  return foundPerson;
 }
-
-// function searchByEyeColorTest(people){
-//   let eyeColor = promptFor("What is the eye color of the person you are looking for?", autoValid);
-//   let foundEyeColor = new Array();
-//   for(let i = 0; i < people.length; i++){
-//     if(people[i.eyeColor] == eyeColor){
-//       foundEyeColor.push(i);
-//       return true;
-//     }
-//     else{
-//       return false;
-//     }
-//   }
-//   return foundEyeColor;
-// }
-
 
 function searchByOccupation(people){
   let occupation = promptFor("If you know the person's occupation, enter it below.", autoValid);
-  
+  let foundPerson;
+
   let foundOccupation = people.filter(function(potentialMatch) {
     if(potentialMatch.occupation === occupation){
       return true;
@@ -194,12 +183,14 @@ function searchByOccupation(people){
     }
 
   })
-  return foundOccupation[0];
+  foundPerson = customValidation(foundOccupation);
+  return foundPerson;
 }
 
 function searchByID(people){
   let id = promptFor("If you know the person's ID, enter it below.", autoValid);
-  
+  let foundPerson;
+
   let foundID = people.filter(function(potentialMatch) {
     if(potentialMatch.id === id){
       return true;
@@ -207,9 +198,9 @@ function searchByID(people){
     else{
       return false;
     }
-
   })
-  return foundID[0];
+  foundPerson = customValidation(foundID);
+  return foundPerson;
 }
 
 //#endregion
