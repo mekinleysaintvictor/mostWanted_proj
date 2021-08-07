@@ -12,11 +12,15 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
+<<<<<<< HEAD
       searchResults = searchByName(people);
+=======
+      searchResults = searchByGender(people); //search by name
+>>>>>>> 06be59d80d1ec682d74f3df175ba22e5c23d9b7e
       break;
     case 'no':
       // TODO: search by traits
-      searchResults = searchByTraits(people);
+      searchResults = searchByName(people);
       break;
     default:
       app(people); // restart app
@@ -159,7 +163,7 @@ function searchByGender(people){
   let foundPerson;
 
   let foundGender = people.filter(function(potentialMatch) {
-    if(potentialMatch.gender === male){
+    if(potentialMatch.gender === gender){
       return true;
     }
     else{
@@ -335,7 +339,7 @@ function customValidation(input){
   let foundPerson;
   let answer;
   for(let i = 0; i < input.length; i++){
-    answer = promptFor("Is " + input[i].firstName + " " + input[i].lastName + " the person you are looking for?", yesNo);
+    answer = promptFor("Is " + input[i].firstName + " " + input[i].lastName + " the person you are looking for? Type 'yes' or 'no' below.", yesNo);
     if(answer == "yes"){
       foundPerson = input[i];
       break;
