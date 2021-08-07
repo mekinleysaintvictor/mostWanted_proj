@@ -312,7 +312,7 @@ function customValidation(input){
   let foundPerson;
   let answer;
   for(let i = 0; i < input.length; i++){
-    answer = prompt("Is " + input[i].firstName + input[i].lastName + " the person.");
+    answer = prompt("Is " + input[i].firstName + " " + input[i].lastName + " the personyou are looking for?");
     if(answer == "yes"){
       foundPerson = input[i];
       break;
