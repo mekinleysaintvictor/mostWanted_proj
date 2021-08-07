@@ -109,13 +109,14 @@ function searchByEyeColor(people){
 
   let foundEyeColor = people.filter(function(potentialMatch) {
     if(potentialMatch.eyeColor === eyeColor){
-      foundPerson = prompt("We found " + potentialMatch.firstName + " " + potentialMatch.lastName + ". Is this the person you're looking for?");
+      return true;
     }
     else{
       return false;
     }
   })
-  return foundEyeColor;
+  foundPerson = customValidation(foundEyeColor);
+  return foundPerson;
 }
 
 function searchByDOB(people){
@@ -176,20 +177,20 @@ function searchByHeight(people){
   return foundHeight[0];
 }
 
-function searchByEyeColorTest(people){
-  let eyeColor = promptFor("What is the eye color of the person you are looking for?", autoValid);
-  let foundEyeColor = new Array();
-  for(let i = 0; i < people.length; i++){
-    if(people[i.eyeColor] == eyeColor){
-      foundEyeColor.push(i);
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
-  return foundEyeColor;
-}
+// function searchByEyeColorTest(people){
+//   let eyeColor = promptFor("What is the eye color of the person you are looking for?", autoValid);
+//   let foundEyeColor = new Array();
+//   for(let i = 0; i < people.length; i++){
+//     if(people[i.eyeColor] == eyeColor){
+//       foundEyeColor.push(i);
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   }
+//   return foundEyeColor;
+// }
 
 
 function searchByOccupation(people){
@@ -328,7 +329,18 @@ function autoValid(input){
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
-  
+  let foundPerson;
+  let answer;
+  for(let i = 0; i < input.length; i++){
+    answer = prompt("Is " + input[i].firstName + input[i].lastName + " the person.");
+    if(answer == "yes"){
+      foundPerson = input[i];
+      break;
+    }else{
+      foundPerson;
+    }
+  }
+  return foundPerson;
 }
 
 //#endregion
