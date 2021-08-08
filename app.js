@@ -12,15 +12,11 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-<<<<<<< HEAD
       searchResults = searchByName(people);
-=======
-      searchResults = searchByGender(people); //search by name
->>>>>>> 06be59d80d1ec682d74f3df175ba22e5c23d9b7e
       break;
     case 'no':
       // TODO: search by traits
-      searchResults = searchByName(people);
+      searchResults = searchByTraits(people);
       break;
     default:
       app(people); // restart app
@@ -70,7 +66,7 @@ function mainMenu(person, people){
 //"eyecolor, height"
 //["eyecolor", "height"]
 function searchByTraits(people){
-  let searchType = promptFor("What traits would you like to search by? Enter: 'eye color', 'DOB', 'gender', 'weight', 'height', 'ID' or 'occupation'", autoValid);
+  let searchType = promptFor("What trait  would you like to search by? Enter: 'eye color', 'DOB', 'gender', 'weight', 'height', 'ID' or 'occupation'", autoValid);
   let searchResults;
   switch(searchType){
     case 'eye color':
@@ -274,7 +270,7 @@ function displayPerson(person, people){
 
 //Display Family
 function displayFamily(person, people) {
-let familyInfo = "Parent(s): " + person.parent + "\n";
+let familyInfo = "Parent(s): " + person.parents + "\n";
 familyInfo += "Children: " + person.child + "\n";
 familyInfo += "Spouse: " + person.spouse + "\n";
 familyInfo += "Sibling(s) " + person.siblings + "\n";
