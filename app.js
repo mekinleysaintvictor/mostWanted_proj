@@ -5,7 +5,7 @@
 //Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
 //#region 
-
+alert ("Welcome to the Most Wanted - People Search! Click the Start Searching button to get started.")
 // app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
@@ -234,6 +234,8 @@ function searchByID(people){
   return personFound;
 }
 
+
+
 //#endregion
 
 //Display functions.
@@ -243,10 +245,13 @@ function searchByID(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert(people.map(function(person){
+    alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
+
+
+
 
 function displayPerson(person, people){
   // print all of the information about a person:
@@ -264,10 +269,9 @@ function displayPerson(person, people){
 
 
   alert(personInfo);
-  alert("Click 'OK' to search again.")
+  alert("Click 'OK' to if you would like to perform another search.")
   app(people);
 }
-
 //Display Family
 function displayFamily(person, people) {
 let familyInfo = "Parent(s): " + person.parents + "\n";
@@ -301,6 +305,7 @@ function hasChild(person, people){
   })
   return foundChild;
 }
+
 //#endregion
 function isParent(person, people){
   let isParent = people.filter(function(potentialMatch){
@@ -346,8 +351,9 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation.
 //this will always return true for all inputs.
 function autoValid(input){
-  return true; // default validation only
+   return true; // default validation only
 }
+
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
@@ -365,5 +371,7 @@ function customValidation(input){
   }
   return foundPerson;
 }
+
+
 
 //#endregion
