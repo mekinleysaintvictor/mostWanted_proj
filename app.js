@@ -250,7 +250,7 @@ function searchByID(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert(people.map(function(person){
+    alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
@@ -279,10 +279,10 @@ function displayPerson(person, people){
 }
 //Display Family
 function displayFamily(person, people) {
-  let familyInfo = "Parent(s) ID: " + person.parents + "\n";
+  let familyInfo = "Parent ID: " + person.parents + "\n";
   familyInfo += "Children ID: " + person.children + "\n";
   familyInfo += "Current Spouse ID: " + person.currentSpouse + "\n";
-  familyInfo += "Sibling(s) ID: " + person.siblings + "\n";
+  familyInfo += "Sibling ID: " + person.siblings + "\n";
 
 alert(familyInfo);
 app(people);
