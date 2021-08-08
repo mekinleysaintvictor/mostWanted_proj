@@ -280,16 +280,27 @@ app(people);
 }
 
 //Display Descendants
-function displayDescendants(person, people) {
-  let descendantsInfo = "Grandparent(s): " + person.grandparents + "\n";
-  descendantsInfo += "Grandchildren: " + person.grandchildren + "\n";
-  
-  alert(descendantsInfo);
-  app(people);
+function displayDescendants(person, people){
+  let newfamilyInfo = new Array();
+  newfamilyInfo[0] = "Here is a list of " + person.firstName + " " + person.lastName + "'s decendants." + "\n";
+  let familyInfo = hasChild(person, people);
+  for(let i = 0; i < familyInfo.length; i++){
+    newfamilyInfo += familyInfo[i].firstName + " " + familyInfo[i].lastName + "\n";
   }
+  alert(newfamilyInfo);
+  app(people);
+}
 
-
-
+function hasChild(person, people){
+  let foundChild = people.filter(function(potentialMatch){
+    if(potentialMatch.parents[0] === person.id || potentialMatch.parents[1] === person.id){
+      return true;
+    }else{
+      return false;
+    }
+  })
+  return foundChild;
+}
 //#endregion
 
 
