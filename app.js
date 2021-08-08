@@ -12,15 +12,12 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-<<<<<<< HEAD
       searchResults = searchByName(people); //search by name
-=======
-<<<<<<< HEAD
+
       searchResults = searchByName(people);
-=======
+
       searchResults = searchByGender(people); //search by name
->>>>>>> 06be59d80d1ec682d74f3df175ba22e5c23d9b7e
->>>>>>> f7e199f098fd42451f8c17e87703f0c03cc33cfc
+
       break;
     case 'no':
       // TODO: search by traits
@@ -280,12 +277,6 @@ function displayPerson(person, people){
   alert("Click 'OK' to search again.")
   app(people);
 }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> f7e199f098fd42451f8c17e87703f0c03cc33cfc
-
 //Display Family
 function displayFamily(person, people) {
   let familyInfo = "Parent(s) ID: " + person.parents + "\n";
