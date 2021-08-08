@@ -5,23 +5,18 @@
 //Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
 //#region 
-
+alert ("Welcome to the Most Wanted - People Search! Click the Start Searching button to get started.")
 // app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
   let searchResults;
   switch(searchType){
     case 'yes':
-      searchResults = searchByName(people); //search by name
-
       searchResults = searchByName(people);
-
-      searchResults = searchByGender(people); //search by name
-
       break;
     case 'no':
       // TODO: search by traits
-      searchResults = searchByGender(people);
+      searchResults = searchByTraits(people);
       break;
     default:
       app(people); // restart app
@@ -71,7 +66,7 @@ function mainMenu(person, people){
 //"eyecolor, height"
 //["eyecolor", "height"]
 function searchByTraits(people){
-  let searchType = promptFor("What traits would you like to search by? Enter: 'eye color', 'DOB', 'gender', 'weight', 'height', 'ID' or 'occupation'", autoValid);
+  let searchType = promptFor("What trait  would you like to search by? Enter: 'eye color', 'DOB', 'gender', 'weight', 'height', 'ID' or 'occupation'", autoValid);
   let searchResults;
   switch(searchType){
     case 'eye color':
@@ -274,29 +269,42 @@ function displayPerson(person, people){
 
 
   alert(personInfo);
-  alert("Click 'OK' to search again.")
+  alert("Click 'OK' to if you would like to perform another search.")
   app(people);
 }
 //Display Family
 function displayFamily(person, people) {
-  let familyInfo = "Parent ID: " + person.parents + "\n";
-  familyInfo += "Children ID: " + person.children + "\n";
-  familyInfo += "Current Spouse ID: " + person.currentSpouse + "\n";
-  familyInfo += "Sibling ID: " + person.siblings + "\n";
+let familyInfo = "Parent(s): " + person.parents + "\n";
+familyInfo += "Children: " + person.child + "\n";
+familyInfo += "Spouse: " + person.spouse + "\n";
+familyInfo += "Sibling(s) " + person.siblings + "\n";
 
 alert(familyInfo);
 app(people);
 }
 
 //Display Descendants
-function displayDescendants(person, people) {
-  let descendantsInfo = "Grandparent(s) ID: " + person.grandparents + "\n";
-  descendantsInfo += "Grandchildren ID: " + person.grandchildren + "\n";
-  
-  alert(descendantsInfo);
-  app(people);
+function displayDescendants(person, people){
+  let newfamilyInfo = new Array();
+  newfamilyInfo[0] = "Here is a list of " + person.firstName + " " + person.lastName + "'s decendants." + "\n";
+  let familyInfo = hasChild(person, people);
+  for(let i = 0; i < familyInfo.length; i++){
+    newfamilyInfo += familyInfo[i].firstName + " " + familyInfo[i].lastName + "\n";
   }
+  alert(newfamilyInfo);
+  app(people);
+}
 
+function hasChild(person, people){
+  let foundChild = people.filter(function(potentialMatch){
+    if(potentialMatch.parents[0] === person.id || potentialMatch.parents[1] === person.id){
+      return true;
+    }else{
+      return false;
+    }
+  })
+  return foundChild;
+}
 
 //#endregion
 
