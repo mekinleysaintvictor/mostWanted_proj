@@ -12,14 +12,22 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
+<<<<<<< HEAD
       searchResults = searchByName(people); //search by name
+=======
+<<<<<<< HEAD
+      searchResults = searchByName(people);
+=======
+      searchResults = searchByGender(people); //search by name
+>>>>>>> 06be59d80d1ec682d74f3df175ba22e5c23d9b7e
+>>>>>>> f7e199f098fd42451f8c17e87703f0c03cc33cfc
       break;
     case 'no':
       // TODO: search by traits
       searchResults = searchByGender(people);
       break;
-      default:
-    app(people); // restart app
+    default:
+      app(people); // restart app
       break;
   }
   
@@ -65,7 +73,38 @@ function mainMenu(person, people){
 //#endregion
 //"eyecolor, height"
 //["eyecolor", "height"]
+function searchByTraits(people){
+  let searchType = promptFor("What traits would you like to search by? Enter: 'eye color', 'DOB', 'gender', 'weight', 'height', 'ID' or 'occupation'", autoValid);
+  let searchResults;
+  switch(searchType){
+    case 'eye color':
+      searchResults = searchByEyeColor(people);
+      break;
+    case 'DOB':
+      searchResults = searchByDOB(people);
+      break;
+    case 'gender':
+      searchResults = searchByGender(people);
+      break;
+    case 'weight':
+      searchResults = searchByWeight(people);
+      break;
+    case 'height':
+      searchResults = searchByHeight(people);
+      break;
+    case 'occupation':
+      searchResults = searchByOccupation(people);
+      break;
+    case 'ID':
+      searchResults = searchByID(people);
+      break;
+    default:
+      app(people);
+      break;
+  }
 
+  mainMenu(searchResults, people);
+}
 //Filter functions.
 //Ideally you will have a function for each trait.
 /////////////////////////////////////////////////////////////////
@@ -141,51 +180,40 @@ function searchByGender(people){
 
 function searchByWeight(people){
   let weight = promptFor("If you know the person's weight, enter it below.", autoValid);
+  let foundPerson;
 
   let foundWeight = people.filter(function(potentialMatch){
-    if(potentialMatch.weight === weight){
+    if(potentialMatch.weight === parseInt(weight)){
       return true;
     }
     else{
       return false;
     }
   })
-  return foundWeight[0];
+  foundPerson = customValidation(foundWeight);
+  return foundPerson;
 }
 
 function searchByHeight(people){
   let height = promptFor("If you know the person's height, enter it below.", autoValid);
+  let foundPerson;
 
   let foundHeight = people.filter(function(potentialMatch){
-    if(potentialMatch.height == weight){
+    if(potentialMatch.height == parseInt(height)){
         return true;
     }
     else{
       return false;
     }
   })
-  return foundHeight[0];
+  foundPerson = customValidation(foundHeight);
+  return foundPerson;
 }
-
-// function searchByEyeColorTest(people){
-//   let eyeColor = promptFor("What is the eye color of the person you are looking for?", autoValid);
-//   let foundEyeColor = new Array();
-//   for(let i = 0; i < people.length; i++){
-//     if(people[i.eyeColor] == eyeColor){
-//       foundEyeColor.push(i);
-//       return true;
-//     }
-//     else{
-//       return false;
-//     }
-//   }
-//   return foundEyeColor;
-// }
-
 
 function searchByOccupation(people){
   let occupation = promptFor("If you know the person's occupation, enter it below.", autoValid);
-  
+  let foundPerson;
+
   let foundOccupation = people.filter(function(potentialMatch) {
     if(potentialMatch.occupation === occupation){
       return true;
@@ -193,24 +221,25 @@ function searchByOccupation(people){
     else{
       return false;
     }
-
   })
-  return foundOccupation[0];
+  foundPerson = customValidation(foundOccupation);
+  return foundPerson;
 }
 
 function searchByID(people){
   let id = promptFor("If you know the person's ID, enter it below.", autoValid);
-  
+  let personFound;
+
   let foundID = people.filter(function(potentialMatch) {
-    if(potentialMatch.id === id){
+    if(potentialMatch.id === parseInt(id)){
       return true;
     }
     else{
       return false;
     }
-
   })
-  return foundID[0];
+  personFound = customValidation(foundID);
+  return personFound;
 }
 
 
@@ -249,10 +278,13 @@ function displayPerson(person, people){
 
   alert(personInfo);
   alert("Click 'OK' to search again.")
-    app(people);
+  app(people);
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> f7e199f098fd42451f8c17e87703f0c03cc33cfc
 
 //Display Family
 function displayFamily(person, people) {
