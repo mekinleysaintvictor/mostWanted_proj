@@ -302,7 +302,16 @@ function hasChild(person, people){
   return foundChild;
 }
 //#endregion
-
+function isParent(person, people){
+  let isParent = people.filter(function(potentialMatch){
+    if(poetentialMatch.id === person.parents[0] || potentialMatch,id === person.parents[1]){
+      return true;
+    }else{
+      return false;
+    }
+  })
+  return isParent;
+}
 
 
 //Validation functions.
