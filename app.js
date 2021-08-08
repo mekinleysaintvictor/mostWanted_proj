@@ -12,11 +12,11 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-      searchResults = searchByGender(people); //search by name
+      searchResults = searchByName(people); //search by name
       break;
     case 'no':
       // TODO: search by traits
-      searchResults = searchByName(people);
+      searchResults = searchByGender(people);
       break;
       default:
     app(people); // restart app
@@ -213,6 +213,8 @@ function searchByID(people){
   return foundID[0];
 }
 
+
+
 //#endregion
 
 //Display functions.
@@ -226,6 +228,9 @@ function displayPeople(people){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
+
+
+
 
 function displayPerson(person, people){
   // print all of the information about a person:
@@ -246,14 +251,15 @@ function displayPerson(person, people){
   alert("Click 'OK' to search again.")
     app(people);
 }
-//console.log("Is this who you are looking for?")
+
+
 
 //Display Family
 function displayFamily(person, people) {
-let familyInfo = "Parent(s): " + person.parent + "\n";
-familyInfo += "Children: " + person.child + "\n";
-familyInfo += "Spouse: " + person.spouse + "\n";
-familyInfo += "Sibling(s) " + person.siblings + "\n";
+  let familyInfo = "Parent(s) ID: " + person.parents + "\n";
+  familyInfo += "Children ID: " + person.children + "\n";
+  familyInfo += "Current Spouse ID: " + person.currentSpouse + "\n";
+  familyInfo += "Sibling(s) ID: " + person.siblings + "\n";
 
 alert(familyInfo);
 app(people);
@@ -261,13 +267,12 @@ app(people);
 
 //Display Descendants
 function displayDescendants(person, people) {
-  let descendantsInfo = "Grandparent(s): " + person.grandparents + "\n";
-  descendantsInfo += "Grandchildren: " + person.grandchildren + "\n";
+  let descendantsInfo = "Grandparent(s) ID: " + person.grandparents + "\n";
+  descendantsInfo += "Grandchildren ID: " + person.grandchildren + "\n";
   
   alert(descendantsInfo);
   app(people);
   }
-
 
 
 //#endregion
@@ -306,8 +311,9 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation.
 //this will always return true for all inputs.
 function autoValid(input){
-  return true; // default validation only
+   return true; // default validation only
 }
+
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
@@ -325,5 +331,7 @@ function customValidation(input){
   }
   return foundPerson;
 }
+
+
 
 //#endregion
